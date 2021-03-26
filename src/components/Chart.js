@@ -1,14 +1,16 @@
 import React from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
-import Data from '../Features/MetricData/metricData';
 import { useSelector } from 'react-redux';
+import Card from '../components/Card';
+import MultipleMetrics from '../Features/MultipleMetrics/multipleMetrics';
 
 export default function Chart() {
   const metricData = useSelector(state => state.metricData.metricData);
 
   return (
     <div>
-      <Data />
+      <MultipleMetrics />
+      <Card />
       <LineChart
         width={1000}
         height={600}
@@ -23,9 +25,10 @@ export default function Chart() {
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="at" />
         <YAxis dataKey="value" />
+        <YAxis dataKey="value" />
         <Tooltip />
         <Legend />
-        <Line type="monotone" dataKey="value" stroke="#8884d8" />
+        <Line type="monotone" dataKey="value" dot={false} />
       </LineChart>
     </div>
   );

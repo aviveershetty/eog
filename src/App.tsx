@@ -7,9 +7,8 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import 'react-toastify/dist/ReactToastify.css';
 import Header from './components/Header';
 import Wrapper from './components/Wrapper';
-// import NowWhat from './components/NowWhat';
-import Chart from './components/Chart';
-import Selector from './components/Selector';
+import MultiChart from './components/MultiChart';
+import Switches from './components/Switches';
 
 const store = createStore();
 const theme = createMuiTheme({
@@ -33,6 +32,7 @@ const App = () => (
       <Wrapper>
         <Header />
         <Selector />
+        <Switches />
         <Chart />
         {/* <NowWhat /> */}
         <ToastContainer />

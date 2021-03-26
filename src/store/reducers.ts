@@ -8,4 +8,6 @@ export default {
   selector: selectorReducer,
   heartbeat: heartbeatReducer,
   metricData: metricDataReducer,
+  multipleData: multipleReducer,
+  activeMetrics: activeReducer,
 };

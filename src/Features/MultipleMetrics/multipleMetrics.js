@@ -8,37 +8,35 @@ const client = createClient({
 });
 
 const measurementQuery = `
-  query($input: MeasurementQuery) {
-    getMeasurements(input: $input) {
+  query($input: [MeasurementQuery]) {
+    getMultipleMeasurements(input: $input) {
       metric,
-      at,
-      value,
-      unit
-    }
+        measurements {
+            metric,
+            at,
+            value,
+            unit
+        }
+    }                                                                                       
   }
   `;
 
 export default () => {
   return (
     <Provider value={client}>
-      <Data />
+      <MultipleMetrics />
     </Provider>
   );
 };
 
-const Data = () => {
-  const metric = useSelector(state => state.selector.selectedMetric);
-  const timeStamp = useSelector(state => state.heartbeat);
+const MultipleMetrics = () => {
+  const activeMetrics = useSelector(state => state.activeMetrics.selectedMetrics);
   const dispatch = useDispatch();
 
   const [measurementRes] = useQuery({
     query: measurementQuery,
     variables: {
-      input: {
-        metricName: metric,
-        before: timeStamp.current,
-        after: timeStamp.past,
-      },
+      input: activeMetrics.slice(1),
     },
   });
 
@@ -51,10 +49,10 @@ const Data = () => {
     if (!data) {
       return;
     } else {
-      const { getMeasurements } = data;
+      const { getMultipleMeasurements } = data;
       dispatch({
-        type: 'METRIC_DATA',
-        payload: getMeasurements,
+        type: 'MULTIPLE_DATA',
+        payload: getMultipleMeasurements,
       });
     }
   });

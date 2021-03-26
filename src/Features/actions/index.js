@@ -15,3 +15,16 @@ export const data = () => {
     type: 'METRIC_DATA',
   };
 };
+
+export const multipleData = () => {
+  return {
+    type: 'MULTIPLE_DATA',
+  };
+};
+
+export const activeMetrics = () => {
+  return {
+    type: 'ACTIVE',
+    type: 'REMOVE',
+  };
+};
