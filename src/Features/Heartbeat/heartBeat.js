@@ -1,9 +1,7 @@
 import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Provider, createClient, useQuery } from 'urql';
-import Chip from '../../components/Chip';
 import { actions } from './sliceReducer';
-import moment from 'moment';
 import MultipleMetrics from '../MultipleMetrics/multipleMetrics';
 
 const client = createClient({
@@ -26,7 +24,6 @@ export default () => {
 
 const Heartbeat = () => {
   const dispatch = useDispatch();
-  const timeStamp = useSelector(state => state.heartbeat.current);
 
   const [heartBeatRes] = useQuery({
     query: heartBeatQuery,

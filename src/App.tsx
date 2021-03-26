@@ -35,10 +35,8 @@ const App = () => (
         <MultipleMetrics />
         <Subscription />
         <Header />
-        <Selector />
         <Switches />
-        <Chart />
-        {/* <NowWhat /> */}
+        <MultiChart />
         <ToastContainer />
       </Wrapper>
     </Provider>

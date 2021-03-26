@@ -1,7 +1,6 @@
 import React, { useEffect, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { Provider, useSubscription, createClient, defaultExchanges, subscriptionExchange } from 'urql';
-import { actions as subActions } from '../Subscription/reducer';
 import { SubscriptionClient } from 'subscriptions-transport-ws';
 import { actions as otActions } from '../OilTemp/reducer';
 import { actions as injActions } from '../InjValve/reducer';
