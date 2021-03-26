@@ -1,13 +1,11 @@
 import { reducer as weatherReducer } from '../Features/Weather/reducer';
-import selectorReducer from '../Features/Selector/reducer';
-import heartbeatReducer from '../Features/Heartbeat/reducer';
-import metricDataReducer from '../Features/MetricData/reducer';
+import { reducer as heartBeatReducer } from '../Features/Heartbeat/sliceReducer';
+import { reducer as activeMetrics } from '../Features/ActiveMetrics/sliceReducer';
+import { reducer as multipleReducer } from '../Features/MultipleMetrics/sliceReducer';
 
 export default {
   weather: weatherReducer,
-  selector: selectorReducer,
-  heartbeat: heartbeatReducer,
-  metricData: metricDataReducer,
   multipleData: multipleReducer,
-  activeMetrics: activeReducer,
+  activeMetrics: activeMetrics,
+  heartbeat: heartBeatReducer,
 };

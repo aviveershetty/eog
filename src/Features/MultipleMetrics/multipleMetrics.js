@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Provider, createClient, useQuery } from 'urql';
 import LinearProgress from '@material-ui/core/LinearProgress';
+import { actions } from './sliceReducer';
 
 const client = createClient({
   url: 'https://react.eogresources.com/graphql',
@@ -50,10 +51,7 @@ const MultipleMetrics = () => {
       return;
     } else {
       const { getMultipleMeasurements } = data;
-      dispatch({
-        type: 'MULTIPLE_DATA',
-        payload: getMultipleMeasurements,
-      });
+      dispatch(actions.multipleData(getMultipleMeasurements));
     }
   });
 

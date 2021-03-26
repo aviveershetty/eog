@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Provider, createClient, useQuery } from 'urql';
 import Chip from '../../components/Chip';
+import { actions } from './sliceReducer';
 import moment from 'moment';
 
 const client = createClient({
@@ -37,10 +38,7 @@ const Heartbeat = () => {
     }
     if (!data) return;
 
-    dispatch({
-      type: 'TIMESTAMP',
-      payload: data.heartBeat,
-    });
+    dispatch(actions.timestamp(data.heartBeat));
   });
 
   return <Chip label={moment(timeStamp).format('MM/DD/YYYY')} />;
