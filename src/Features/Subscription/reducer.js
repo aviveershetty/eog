@@ -1,17 +1,15 @@
 import { createSlice } from 'redux-starter-kit';
 
 const initialState = {
-  current: 0,
-  past: 0,
+  subData: {},
 };
 
 const slice = createSlice({
-  name: 'heartbeat',
+  name: 'subscriptionData',
   initialState,
   reducers: {
-    timestamp: (state, action) => {
-      state.current = action.payload;
-      state.past = action.payload - 180000;
+    subData: (state, action) => {
+      state.subData = action.payload;
     },
   },
 });

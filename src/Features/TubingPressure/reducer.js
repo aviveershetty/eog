@@ -1,17 +1,15 @@
 import { createSlice } from 'redux-starter-kit';
 
 const initialState = {
-  current: 0,
-  past: 0,
+  tubingPressureData: [],
 };
 
 const slice = createSlice({
-  name: 'heartbeat',
+  name: 'tubingPressureData',
   initialState,
   reducers: {
-    timestamp: (state, action) => {
-      state.current = action.payload;
-      state.past = action.payload - 180000;
+    tubingPressureData: (state, action) => {
+      state.tubingPressureData = [...state.tubingPressureData, action.payload];
     },
   },
 });
