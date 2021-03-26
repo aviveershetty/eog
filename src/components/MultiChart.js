@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import Card from '../components/Card';
-// import { actions } from '../Features/MultipleMetrics/sliceReducer';
 
 export default function MultiChart() {
   const [dataArr, dataCon] = useState([]);
   const multiData = useSelector(state => state.multipleData.multipleData);
-  // const dispatch = useDispatch();
   const injValveData = useSelector(state => state.injValve.injValveData);
   const oilTempData = useSelector(state => state.oilTemp.oilTempData);
   const flareTempData = useSelector(state => state.flareTemp.flareTempData);
@@ -16,11 +14,21 @@ export default function MultiChart() {
   const tubingPressureData = useSelector(state => state.tubingPressure.tubingPressureData);
   const activeMetrics = useSelector(state => state.activeMetrics.selectedMetrics);
 
-   useEffect(() => {
+  const filterByActive = data => {
+    for (let i = 0; i < activeMetrics.length; i++) {
+      if (data.metric === activeMetrics[i].metricName) {
+        return true;
+      }
+    }
+  };
+
+  const dataForChart = dataArr.filter(filterByActive);
+
+  useEffect(() => {
     if (multiData.length > 0) {
-      dataCon([
+      return dataCon([
         {
-          metric: 'injValve',
+          metric: 'injValveOpen',
           measurements: multiData[0].measurements.concat(injValveData),
         },
         {
@@ -44,28 +52,28 @@ export default function MultiChart() {
           measurements: multiData[5].measurements.concat(waterTempData),
         },
       ]);
-    }}, [injValveData]);
+    }
+  }, [injValveData, casingPressureData, flareTempData, multiData, oilTempData, tubingPressureData, waterTempData]);
 
-    const names = {
-      injValveOpen: 'INJ Valve Open',
-      oilTemp: 'Oil Temp',
-      tubingPressure: 'Tubing Pressure',
-      flareTemp: 'Flare Temp',
-      casingPressure: 'Casing Pressure',
-      waterTemp: 'Water Temp',
-      default: 'metric',
-    };
+  const names = {
+    injValveOpen: 'INJ Valve Open',
+    oilTemp: 'Oil Temp',
+    tubingPressure: 'Tubing Pressure',
+    flareTemp: 'Flare Temp',
+    casingPressure: 'Casing Pressure',
+    waterTemp: 'Water Temp',
+    default: 'metric',
+  };
 
-    const colors = {
-      injValveOpen: '#1BD82A',
-      oilTemp: '#000000',
-      tubingPressure: '#FF0000',
-      flareTemp: '#FFB201',
-      casingPressure: '#830BEE',
-      waterTemp: '#000CFF',
-      default: '#00FFE0',
-    };
- 
+  const colors = {
+    injValveOpen: '#1BD82A',
+    oilTemp: '#000000',
+    tubingPressure: '#FF0000',
+    flareTemp: '#FFB201',
+    casingPressure: '#830BEE',
+    waterTemp: '#000CFF',
+    default: '#00FFE0',
+  };
 
   return (
     <>
@@ -73,6 +81,7 @@ export default function MultiChart() {
         if (i.metricName === injValveData[0].metric) {
           return (
             <Card
+              color={colors[i.metricName]}
               metric={names[i.metricName]}
               data={`${injValveData[injValveData.length - 1].value}${injValveData[0].unit}`}
             />
@@ -80,6 +89,7 @@ export default function MultiChart() {
         } else if (i.metricName === oilTempData[0].metric) {
           return (
             <Card
+              color={colors[i.metricName]}
               metric={names[i.metricName]}
               data={`${oilTempData[oilTempData.length - 1].value} ${oilTempData[0].unit}`}
             />
@@ -87,6 +97,7 @@ export default function MultiChart() {
         } else if (i.metricName === flareTempData[0].metric) {
           return (
             <Card
+              color={colors[i.metricName]}
               metric={names[i.metricName]}
               data={`${flareTempData[flareTempData.length - 1].value} ${flareTempData[0].unit}`}
             />
@@ -94,6 +105,7 @@ export default function MultiChart() {
         } else if (i.metricName === waterTempData[0].metric) {
           return (
             <Card
+              color={colors[i.metricName]}
               metric={names[i.metricName]}
               data={`${waterTempData[waterTempData.length - 1].value} ${waterTempData[0].unit}`}
             />
@@ -101,6 +113,7 @@ export default function MultiChart() {
         } else if (i.metricName === casingPressureData[0].metric) {
           return (
             <Card
+              color={colors[i.metricName]}
               metric={names[i.metricName]}
               data={`${casingPressureData[casingPressureData.length - 1].value} ${casingPressureData[0].unit}`}
             />
@@ -108,6 +121,7 @@ export default function MultiChart() {
         } else if (i.metricName === tubingPressureData[0].metric) {
           return (
             <Card
+              color={colors[i.metricName]}
               metric={names[i.metricName]}
               data={`${tubingPressureData[tubingPressureData.length - 1].value} ${tubingPressureData[0].unit}`}
             />
@@ -120,12 +134,12 @@ export default function MultiChart() {
         <YAxis dataKey="value" />
         <Tooltip />
         <Legend layout="vertical" verticalAlign="middle" align="right" />
-        {dataArr.map(i => {
+        {dataForChart.map(i => {
           return (
             <Line
               dataKey="value"
               data={i.measurements}
-              name={names[i.metric])}
+              name={names[i.metric]}
               key={i.metric}
               dot={false}
               stroke={colors[i.metric]}
