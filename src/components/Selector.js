@@ -6,7 +6,6 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import Button from '@material-ui/core/Button';
 import { useDispatch } from 'react-redux';
-import { selector } from '../Features/actions';
 
 const useStyles = makeStyles(theme => ({
   button: {
