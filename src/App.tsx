@@ -4,9 +4,9 @@ import { Provider } from 'react-redux';
 import { ToastContainer } from 'react-toastify';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
+import Container from '@material-ui/core/Container';
 import 'react-toastify/dist/ReactToastify.css';
 import Header from './components/Header';
-import Wrapper from './components/Wrapper';
 import MultiChart from './components/MultiChart';
 import Switches from './components/Switches';
 import Subscription from './Features/Subscription/subscription';
@@ -31,14 +31,14 @@ const App = () => (
   <MuiThemeProvider theme={theme}>
     <CssBaseline />
     <Provider store={store}>
-      <Wrapper>
+      <Header />
+      <Container>
         <MultipleMetrics />
         <Subscription />
-        <Header />
         <Switches />
         <MultiChart />
         <ToastContainer />
-      </Wrapper>
+      </Container>
     </Provider>
   </MuiThemeProvider>
 );

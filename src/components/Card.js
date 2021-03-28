@@ -7,7 +7,7 @@ import Typography from '@material-ui/core/Typography';
 export default function SimpleCard(props) {
   const useStyles = makeStyles({
     card: {
-      maxWidth: 150,
+      width: 150,
       float: 'left',
       marginLeft: 15,
     },
