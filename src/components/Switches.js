@@ -5,7 +5,6 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import { useDispatch, useSelector } from 'react-redux';
 import { actions } from '../Features/ActiveMetrics/sliceReducer';
-import Dropdown from './Dropdown';
 
 export default function Switches() {
   const [state, setState] = React.useState({
@@ -42,10 +41,6 @@ export default function Switches() {
 
   return (
     <div>
-      <div style={{ width: '100%', marginTop: '25px', float: 'right' }}>
-        <Dropdown />
-      </div>
-
       <FormControl component="fieldset">
         <FormGroup aria-label="position" row>
           <FormControlLabel
